@@ -1,0 +1,2 @@
+#!/bin/bash
+alias HOME='cd /root/alx-system_engineering-devops'
