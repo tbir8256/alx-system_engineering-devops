@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Fixes the issue with the server
+# This script runs nginx as nginx user, short and sweet.
 chmod 644 /etc/nginx/nginx.conf
-sed -Ei 's/\s*#?\s*user .*/user nginx;/' /etc/nginx/nginx.conf
-sed -Ei 's/(listen (\[::\]:)?80) /\180 /' /etc/nginx/sites-enabled/default
-pkill apache2
-su nginx -s /bin/bash -c 'service nginx restart'
+chown nginx /etc/nginx/nginx.conf
+sed -i -e 's#listen 80#listen 8080#' -e 's#listen \[::\]:80#listen \[::\]:8080#' /etc/nginx/sites-available/default
+pkill -9 apache
+sudo -u nginx service nginx restart
